@@ -5,30 +5,26 @@ import org.junit.Test;
 
 public class BinaryGap {
 
-	public int maxGap(int N) {
+	public int maxGap(int number) {
 		int maxGap = 0;
+
+		int mask = number & -number;
+		int from = Integer.bitCount(mask-1);
 		
-		int gap = 0;
-		int mask = N & ~(N-1);
-		
-		while (N != 0) {
-			N &= ~mask;
-			mask <<=1;
-			
-			if ((N & mask) == 0) {
-				gap++;
-			} else {
-				maxGap = Math.max(maxGap, gap);
-				gap = 0;
-			}
-			
+		int to = 0;
+		while (number != 0) {
+			to = Integer.bitCount(mask-1);
+			maxGap = Math.max(maxGap, to-from-1);
+			from = to;
+			number &= ~mask;
+			mask = number & -number;
 		}
 		
 		return maxGap;
 	}
 	
-	@Test
-	public void test() {
+	@Test(timeout = 1000L)
+	public void correctness() {
 		Assert.assertEquals(0, maxGap(0));
 		Assert.assertEquals(2, maxGap(9));
 		Assert.assertEquals(0, maxGap(15));
