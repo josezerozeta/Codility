@@ -9,15 +9,12 @@ public class MinPerimeterRectangle {
 		int perimeter = Integer.MAX_VALUE;
 		
 		int i = 1;
-		while (i*i < area) {
+		int l = (int) Math.sqrt(area);
+		while (i <= l) {
 			if (area % i == 0) {
 				perimeter = Math.min(perimeter, (i + area/i) << 1);
 			}
 			i++;
-		}
-		
-		if (i*i == area) {
-			perimeter = Math.min(perimeter, i << 2);
 		}
 		
 		return perimeter;
