@@ -23,8 +23,8 @@ public class TapeEquilibrium {
 		return minDiff;
 	}
 	
-	@Test
-	public void maxDifference() {
+	@Test(timeout = 1000L)
+	public void correctness() {
 		Assert.assertEquals(9, minDifference(new int[] { 5, -4 }));
 		Assert.assertEquals(1, minDifference(new int[] { 3, 1, 2, 4, 3 }));
 		Assert.assertEquals(4, minDifference(new int[] { 5, 6, 2, 4, 1 }));
